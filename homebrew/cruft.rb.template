@@ -3,15 +3,15 @@
 
 class Cruft < Formula
   desc "Find and clean gigabytes of developer cruft on your Mac. Terminal-native. Safe by default."
-  homepage "https://github.com/anomalyco/cruft"
+  homepage "https://github.com/anastanvir/cruft"
   version "{{VERSION}}"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/anomalyco/cruft/releases/download/v{{VERSION}}/cruft"
+      url "https://github.com/anastanvir/cruft/releases/download/v{{VERSION}}/cruft"
       sha256 "{{ARM64_SHA}}"
     else
-      url "https://github.com/your-handle/cruft/releases/download/v{{VERSION}}/cruft-x64"
+      url "https://github.com/anastanvir/cruft/releases/download/v{{VERSION}}/cruft-x64"
       sha256 "{{X64_SHA}}"
     end
   end
