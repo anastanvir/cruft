@@ -1,0 +1,25 @@
+export const bg = "#000000";
+export const bgElevated = "#0D0D0D";
+export const bgSelected = "#1A1A1A";
+export const bgHover = "#141414";
+export const bgModal = "#2E2E2E";
+export const border = "#2A2A2A";
+export const borderFocus = "#FFFFFF";
+export const text = "#FFFFFF";
+export const textMuted = "#777777";
+export const textDim = "#444444";
+export const accent = "#FFFFFF";
+export const accentAlt = "#AAAAAA";
+export const success = "#4CAF50";
+export const warning = "#FFC107";
+export const danger = "#F44336";
+export const info = "#2196F3";
+export const sizeXL = "#EBA0AC";
+export const sizeL = "#FAB387";
+export const sizeM = "#FFC107";
+export const sizeS = "#4CAF50";
+
+export const riskSafe = "#4CAF50";
+export const riskLow = "#FFC107";
+export const riskMedium = "#FF9800";
+export const riskHigh = "#F44336";

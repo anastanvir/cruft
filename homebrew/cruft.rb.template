@@ -1,0 +1,26 @@
+# typed: false
+# frozen_string_literal: true
+
+class Cruft < Formula
+  desc "Find and clean gigabytes of developer cruft on your Mac. Terminal-native. Safe by default."
+  homepage "https://github.com/anomalyco/cruft"
+  version "{{VERSION}}"
+
+  on_macos do
+    if Hardware::CPU.arm?
+      url "https://github.com/anomalyco/cruft/releases/download/v{{VERSION}}/cruft"
+      sha256 "{{ARM64_SHA}}"
+    else
+      url "https://github.com/your-handle/cruft/releases/download/v{{VERSION}}/cruft-x64"
+      sha256 "{{X64_SHA}}"
+    end
+  end
+
+  def install
+    bin.install Dir["cruft*"].first => "cruft"
+  end
+
+  test do
+    assert_match "cruft", shell_output("#{bin}/cruft --version")
+  end
+end

@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.*
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo
+
+# Bun
+.bun/
+
+# Runtime data
+.cache/
+.cruft/
+.tmp/
+tmp/
+
+# Test artifacts
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.local
+*.local.*
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Misc
+*.pem
+*.pid
+*.seed
+*.pid.lock

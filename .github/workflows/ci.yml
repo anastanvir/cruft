@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun test
+      - run: bun run lint
+
+  build:
+    runs-on: macos-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install
+      - run: bun build --compile --minify --target=bun-darwin-arm64 ./src/index.tsx --outfile ./dist/cruft
+      - run: bun build --compile --minify --target=bun-darwin-x64 ./src/index.tsx --outfile ./dist/cruft-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: binaries
+          path: dist/

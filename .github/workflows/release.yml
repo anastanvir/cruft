@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install
+
+      - name: Build arm64 binary
+        run: bun build --compile --minify --target=bun-darwin-arm64 ./src/index.tsx --outfile ./dist/cruft
+
+      - name: Build x86_64 binary
+        run: bun build --compile --minify --target=bun-darwin-x64 ./src/index.tsx --outfile ./dist/cruft-x64
+
+      - name: Compute checksums
+        run: |
+          shasum -a 256 ./dist/cruft | awk '{print $1}' > ./dist/cruft.sha256
+          shasum -a 256 ./dist/cruft-x64 | awk '{print $1}' > ./dist/cruft-x64.sha256
+
+      - name: Generate Homebrew formula
+        run: |
+          ARM64_SHA=$(cat dist/cruft.sha256 | awk '{print $1}')
+          X64_SHA=$(cat dist/cruft-x64.sha256 | awk '{print $1}')
+          VERSION=${GITHUB_REF_NAME#v}
+          ARM64_SHA=$ARM64_SHA X64_SHA=$X64_SHA VERSION=$VERSION bun run scripts/update-tap.ts
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/cruft
+            dist/cruft-x64
+            dist/cruft.sha256
+            dist/cruft-x64.sha256
+            dist/cruft.rb
+          generate_release_notes: true
+
+      - name: Publish to npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
