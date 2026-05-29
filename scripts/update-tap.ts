@@ -10,8 +10,8 @@ const VERSION = process.env.VERSION ?? "0.1.0";
 const ARM64_SHA = process.env.ARM64_SHA ?? "";
 const X64_SHA = process.env.X64_SHA ?? "";
 
-const TEMPLATE_PATH = resolve(__dirname, "../homebrew/cruft.rb.template");
-const OUTPUT_PATH = resolve(__dirname, "../dist/cruft.rb");
+const TEMPLATE_PATH = resolve(__dirname, "../homebrew/kruft.rb.template");
+const OUTPUT_PATH = resolve(__dirname, "../dist/kruft.rb");
 
 async function main() {
   let template = readFileSync(TEMPLATE_PATH, "utf-8");

@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-class Cruft < Formula
+class Kruft < Formula
   desc "Find and clean gigabytes of developer cruft on your Mac. Terminal-native. Safe by default."
   homepage "https://github.com/anastanvir/cruft"
   version "{{VERSION}}"
@@ -17,10 +17,10 @@ class Cruft < Formula
   end
 
   def install
-    bin.install Dir["cruft*"].first => "cruft"
+    bin.install Dir["cruft*"].first => "kruft"
   end
 
   test do
-    assert_match "cruft", shell_output("#{bin}/cruft --version")
+    assert_match version.to_s, shell_output("#{bin}/kruft --version")
   end
 end

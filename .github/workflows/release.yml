@@ -45,5 +45,5 @@ jobs:
             dist/cruft-x64
             dist/cruft.sha256
             dist/cruft-x64.sha256
-            dist/cruft.rb
+            dist/kruft.rb
           generate_release_notes: true
